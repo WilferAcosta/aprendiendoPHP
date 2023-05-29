@@ -27,6 +27,23 @@
     //declarar una constante de tecto
     define("SALUDO","hola como estas");
     //declarar una constante boolean
-    define("ES_VALIDO",true)
+    define("ES_VALIDO",true);
 
+    /** Tipos de datos*/
+
+    //boolean
+    $logueado = true;
+    var_dump($logueado);
+    //enteros
+    $numeros = 200;
+    var_dump($numeros);
+    //floats
+    $float = 200.5;
+    var_dump($float);
+    // string
+    $nombres = "Wilfer";
+    var_dump($nombres);
+    // array
+    $array =[];
+    var_dump($array);
 ?>  
