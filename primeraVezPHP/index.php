@@ -46,4 +46,32 @@
     // array
     $array =[];
     var_dump($array);
+
+    /** Números y operadores */
+    //creamos variables
+    $numero1= 20;
+    $numero2 = 30;
+    $numero3 = 30;
+    $numero4 = "30";
+    //mayor que osea numero1 es mayor que numero2
+    var_dump($numero1 > $numero2);
+    echo "<br>"; 
+    //menor que osea numero1 es menor que numero2
+    var_dump($numero1 < $numero2);
+    echo "<br>"; 
+    //mayor o igual que osea numero1 es mayor o igual al numero 2
+    var_dump($numero1 >= $numero2);
+    echo "<br>"; 
+    //menor o igual que osea que si numero1 es menor o igual al numero2
+    var_dump($numero1 <= $numero2);
+    echo "<br>"; 
+    //igual doble osea que si es igual el numero o texto no importa el tipo de dato
+    var_dump($numero2 == $numero3);
+    echo "<br>"; 
+    //igual doble osea que si es igual el numero o texto no importa el tipo de dato
+    var_dump($numero2 == $numero4);
+    echo "<br>"; 
+    //igual triple o estricto valida que los dos sean igual en value y en tipo de dato
+    var_dump($numero2 === $numero4);
+    echo "<br>"; 
 ?>  
