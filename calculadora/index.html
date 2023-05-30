@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- se usa en el form action se pone el archivo php y se pone el metodo que quiero enviar por mediante name -->
+    <!-- <form action="api.php" method="POST">
+        <input type="text" name="nombre" placeholder="Ingrese su nombre"><br>
+        <input type="text" name="apellido" placeholder="Ingrese su apellido"><br>
+        <input type="number" name="edad" placeholder="Ingrese su edad"><br>
+        <label>Genero</label><br>
+        <input type="radio" name="genero" value="Masculino"><label>Masculino</label>
+        <input type="radio" name="genero" value="Femenico"><label>Femenino</label><br>
+        <label>Nacionalidad</label>
+        <select name="nacionalidad">
+            <option value="Colombiano">Colombiano</option>
+            <option value="Venezolano">Venezolano</option>
+            <option value="Europeo">Europeo</option>
+        </select><br>
+        <label>Pasatiempos</label>
+        <input type="checkbox" name="pasatiempo[]" value="Programar"><label>Programar</label><br>
+        <input type="checkbox" name="pasatiempo[]" value="Cocinar"><label>Cocinar</label><br>
+        <input type="checkbox" name="pasatiempo[]" value="Musica"><label>Musica</label><br>
+        <input type="checkbox" name="pasatiempo[]" value="Lavar ropa"><label>Lavar ropa</label><br>
+        <input type="submit" value="Enviar">
+    </form> -->
+    <form action="calculadora.php" method="POST" >
+        <label for="num1">Número 1:</label>
+        <input type="number" name="num1" id="num1" required>
+
+        <label for="num2">Número 2:</label>
+        <input type="number" name="num2" id="num2" required>
+
+        <label for="operator">Operador:</label>
+        <select name="operator" id="operator">
+            <option value="+">Suma</option>
+            <option value="-">Resta</option>
+            <option value="*">Multiplicación</option>
+            <option value="/">División</option>
+        </select>
+        <input type="submit" value="Calcular">
+    </form>
+    
+</body>
+</html>
