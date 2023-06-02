@@ -145,5 +145,100 @@ if (in_array("Irix", $os)) {
 if (in_array("mac", $os)) {
     echo "Existe mac";
 }
+//array_rand(): Devuelve una o varias claves aleatorias de un array.
+$entrada = array("Neo", "Morpheus", "Trinity", "Cypher", "Tank");
+$claves_aleatorias = array_rand($entrada, 2);
+echo $entrada[$claves_aleatorias[0]] . "\n";
+echo $entrada[$claves_aleatorias[1]] . "\n";
 
+//array_unique(): Elimina los valores duplicados de un array.
+$entrada = array("a" => "verde", "rojo", "b" => "verde", "azul", "rojo");
+$resultado = array_unique($entrada);
+print_r($resultado);
+
+//array_intersect(): Devuelve un array con los valores comunes a todos los arrays dados.
+$array1 = array("a" => "green", "red", "blue");
+$array2 = array("b" => "green", "yellow", "red");
+$result = array_intersect($array1, $array2);
+print_r($result);
+
+//array_diff(): Devuelve un array con los valores del primer array que no están presentes en los arrays adicionales.
+$array1    = array("a" => "green", "red", "blue", "red");
+$array2    = array("b" => "green", "yellow", "red");
+$resultado = array_diff($array1, $array2);
+
+print_r($resultado);
+
+//array_push(): Agrega uno o más elementos al final de un array.
+$pila = array("naranja", "plátano");
+array_push($pila, "manzana", "arándano");
+print_r($pila);
+
+//array_pop(): Extrae y elimina el último elemento de un array.
+$stack = array("naranja", "plátano", "manzana", "frambuesa");
+$fruit = array_pop($stack);
+print_r($stack);
+
+//array_reverse(): Revierte el orden de los elementos en un array.
+$input  = array("php", 4.0, array("verde", "rojo"));
+$reversed = array_reverse($input);
+$preserved = array_reverse($input, true);
+
+print_r($input);
+print_r($reversed);
+print_r($preserved);
+
+//array_sum(): Devuelve la suma de todos los valores de un array numérico.
+
+$a = array(2, 4, 6, 8);
+echo "sum(a) = " . array_sum($a) . "\n";
+
+$b = array("a" => 1.2, "b" => 2.3, "c" => 3.4);
+echo "sum(b) = " . array_sum($b) . "\n";
+
+//array_product(): Devuelve el producto de todos los valores de un array numérico.
+$a = array(2, 4, 6, 8);
+echo "producto(a) = " . array_product($a) . "\n";
+echo "producto(array()) = " . array_product(array()) . "\n";
+
+//array_chunk(): Divide un array en fragmentos más pequeños.
+$input_array = array('a', 'b', 'c', 'd', 'e');
+print_r(array_chunk($input_array, 2));
+print_r(array_chunk($input_array, 2, true));
+
+//array_keys(): Devuelve todas las claves de un array.
+$array = array(0 => 100, "color" => "red");
+print_r(array_keys($array));
+
+$array = array("blue", "red", "green", "blue", "blue");
+print_r(array_keys($array, "blue"));
+
+$array = array("color" => array("blue", "red", "green"),
+               "size"  => array("small", "medium", "large"));
+print_r(array_keys($array));
+
+//array_values(): Devuelve todos los valores de un array.
+$array = array("size" => "XL", "color" => "gold");
+print_r(array_values($array));
+
+//array_walk(): Aplica una función de devolución de llamada a cada elemento de un array.
+$frutas = array("d" => "limón", "a" => "naranja", "b" => "banana", "c" => "manzana");
+
+function test_alter(&$elemento1, $clave, $prefijo)
+{
+    $elemento1 = "$prefijo: $elemento1";
+}
+
+function test_print($elemento2, $clave)
+{
+    echo "$clave. $elemento2<br />\n";
+}
+
+echo "Antes ...:\n";
+array_walk($frutas, 'test_print');
+
+array_walk($frutas, 'test_alter', 'fruta');
+echo "... y después:\n";
+
+array_walk($frutas, 'test_print');
 ?>
