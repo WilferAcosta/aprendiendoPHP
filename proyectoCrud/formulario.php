@@ -17,7 +17,7 @@
         print_r($_DATA);
     
     }elseif (isset($_POST['buscar'])) {
-        $cedula = $_POST['cedula'];
+    $cedula = $_POST['cedula'];
     // Construir la URL de búsqueda
     $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($cedula);
     // Realizar la solicitud GET a la URL de búsqueda
