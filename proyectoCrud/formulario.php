@@ -254,8 +254,7 @@
                             <th>Email</th>
                             <th>Horario de Entrada</th>
                             <th>Team</th>
-                            <th>Trainer</th>
-                            <th>Cédula</th>
+                            <th>Trainer</th>     
                         </tr>
                     </thead>
                     <tbody>
@@ -279,7 +278,6 @@
                                 echo "<td>" . $item['horarioEntrada'] . "</td>";
                                 echo "<td>" . $item['team'] . "</td>";
                                 echo "<td>" . $item['trainer'] . "</td>";
-                                echo "<td>" . $item['cedula'] . "</td>";
                                 
                                 echo '<td><button type="submit" name="subirData" value="' . $item['cedula'] . '">↑</button></td>';
                                 // Añade más columnas según los datos que quieras mostrar
