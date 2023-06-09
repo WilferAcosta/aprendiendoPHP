@@ -16,83 +16,98 @@
         $_DATA = file_get_contents("https://648135c829fa1c5c50312fcf.mockapi.io/users", false, $config);
     } elseif (isset($_POST['buscar'])) {
         $cedula = $_POST['cedula'];
-        // Construir la URL de búsqueda
-        $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($cedula);
-        // Realizar la solicitud GET a la URL de búsqueda
-        $response = file_get_contents($url);
-        // Analizar la respuesta JSON
-        $data = json_decode($response, true);
-        if (!empty($data)) {
-            $nombre = $data[0]['nombre'];
-            $apellido = $data[0]['apellido'];
-            $direccion = $data[0]['direccion'];
-            $edad = $data[0]['edad'];
-            $email = $data[0]['email'];
-            $horarioEntrada = $data[0]['horarioEntrada'];
-            $team = $data[0]['team'];
-            $trainer = $data[0]['trainer'];
-        }else {
-            echo "No se encontraron resultados.";
+        
+        // Validate cedula input
+        if (!empty($cedula)) {
+            // Construir la URL de búsqueda
+            $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($cedula);
+            // Realizar la solicitud GET a la URL de búsqueda
+            $response = file_get_contents($url);
+            // Analizar la respuesta JSON
+            $data = json_decode($response, true);
+            if (!empty($data)) {
+                $nombre = $data[0]['nombre'];
+                $apellido = $data[0]['apellido'];
+                $direccion = $data[0]['direccion'];
+                $edad = $data[0]['edad'];
+                $email = $data[0]['email'];
+                $horarioEntrada = $data[0]['horarioEntrada'];
+                $team = $data[0]['team'];
+                $trainer = $data[0]['trainer'];
+                
+                // Display the results
+                // ...
+            } else {
+                echo "No se encontraron resultados.";
+            }
+        } else {
+            echo "La cédula es requerida para realizar la búsqueda.";
         }
     } elseif (isset($_POST['actualizar'])) {
         $cedula = $_POST['cedula'];
-        // Construir la URL de búsqueda
-        $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($cedula);
-        // Realizar la solicitud GET a la URL de búsqueda
-        $response = file_get_contents($url);
-        // Analizar la respuesta JSON
-        $data = json_decode($response, true);
-
-        // Verificar si se encontraron datos para la cédula ingresada
-        if (!empty($data)) {
-            $id = $data[0]['id'];
-            $nombre = $_POST['nombre'];
-            $apellido = $_POST['apellido'];
-            $direccion = $_POST['direccion'];
-            $edad = $_POST['edad'];
-            $email = $_POST['email'];
-            $horarioEntrada = $_POST['horarioEntrada'];
-            $team = $_POST['team'];
-            $trainer = $_POST['trainer'];
-
-            // Construir el array de datos a enviar en la solicitud de actualización
-            $data = array(
-                'nombre' => $nombre,
-                'apellido' => $apellido,
-                'direccion' => $direccion,
-                'edad' => $edad,
-                'email' => $email,
-                'horarioEntrada' => $horarioEntrada,
-                'team' => $team,
-                'trainer' => $trainer,
-                'cedula' => $cedula
-            );
-
-            // Convertir los datos a formato JSON
-            $data = json_encode($data);
-
-            // Construir las credenciales y configuración de la solicitud
-            $credenciales["http"]["method"] = "PUT";
-            $credenciales["http"]["header"] = "Content-type: application/json";
-            $credenciales["http"]["content"] = $data;
-            $config = stream_context_create($credenciales);
-
-            // Realizar la solicitud de actualización enviando los datos al endpoint correspondiente
-            $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users/" . urlencode($id);
-            $response = file_get_contents($url, false, $config);
-
-            // Procesar la respuesta y mostrar un mensaje de éxito o error
-            if ($response !== false) {
-                echo "Los datos se actualizaron correctamente.";
+    
+        // Validate cedula input
+        if (!empty($cedula)) {
+            // Construir la URL de búsqueda
+            $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($cedula);
+            // Realizar la solicitud GET a la URL de búsqueda
+            $response = file_get_contents($url);
+            // Analizar la respuesta JSON
+            $data = json_decode($response, true);
+    
+            // Verificar si se encontraron datos para la cédula ingresada
+            if (!empty($data)) {
+                $id = $data[0]['id'];
+                $nombre = $_POST['nombre'];
+                $apellido = $_POST['apellido'];
+                $direccion = $_POST['direccion'];
+                $edad = $_POST['edad'];
+                $email = $_POST['email'];
+                $horarioEntrada = $_POST['horarioEntrada'];
+                $team = $_POST['team'];
+                $trainer = $_POST['trainer'];
+    
+                // Construir el array de datos a enviar en la solicitud de actualización
+                $data = array(
+                    'nombre' => $nombre,
+                    'apellido' => $apellido,
+                    'direccion' => $direccion,
+                    'edad' => $edad,
+                    'email' => $email,
+                    'horarioEntrada' => $horarioEntrada,
+                    'team' => $team,
+                    'trainer' => $trainer,
+                    'cedula' => $cedula
+                );
+    
+                // Convertir los datos a formato JSON
+                $data = json_encode($data);
+    
+                // Construir las credenciales y configuración de la solicitud
+                $credenciales["http"]["method"] = "PUT";
+                $credenciales["http"]["header"] = "Content-type: application/json";
+                $credenciales["http"]["content"] = $data;
+                $config = stream_context_create($credenciales);
+    
+                // Realizar la solicitud de actualización enviando los datos al endpoint correspondiente
+                $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users/" . urlencode($id);
+                $response = file_get_contents($url, false, $config);
+    
+                // Procesar la respuesta y mostrar un mensaje de éxito o error
+                if ($response !== false) {
+                    echo "Los datos se actualizaron correctamente.";
+                } else {
+                    echo "Error al actualizar los datos.";
+                }
             } else {
-                echo "Error al actualizar los datos.";
+                echo "No se encontraron datos para la cédula ingresada.";
             }
         } else {
-            echo "No se encontraron datos para la cédula ingresada.";
+            echo "El campo cédula es requerido para realizar la actualización.";
         }
     } elseif (isset($_POST['eliminar'])) {
         $cedula = $_POST['cedula'];
-
+        if(empty($cedula)){
         // Construir la URL de búsqueda
         $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($cedula);
 
@@ -123,6 +138,9 @@
         } else {
             echo "No se encontraron datos para la cédula ingresada.";
         }
+    }else{
+        echo "se requiere la  cedula para la busqueda";
+    }
     } elseif (isset($_POST['subirData'])) {
         $trae=$_POST['subirData'];
         $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($trae);
