@@ -124,7 +124,24 @@
             echo "No se encontraron datos para la cédula ingresada.";
         }
     } elseif (isset($_POST['subirData'])) {
-        var_dump($_POST['subirData']);
+        $trae=$_POST['subirData'];
+        $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users?cedula=" . urlencode($trae);
+        // Realizar la solicitud GET a la URL de búsqueda
+        $response = file_get_contents($url);
+        // Analizar la respuesta JSON
+        $data = json_decode($response, true);
+        if (!empty($data)) {
+            $nombre = $data[0]['nombre'];
+            $apellido = $data[0]['apellido'];
+            $direccion = $data[0]['direccion'];
+            $edad = $data[0]['edad'];
+            $email = $data[0]['email'];
+            $horarioEntrada = $data[0]['horarioEntrada'];
+            $team = $data[0]['team'];
+            $trainer = $data[0]['trainer'];
+        }else {
+            echo "No se encontraron resultados.";
+        }
     };
 
     ?>
@@ -224,13 +241,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <form method="POST">
                         <?php
                         $url = "https://648135c829fa1c5c50312fcf.mockapi.io/users";
                         $response = file_get_contents($url);
 
                         // Analizar la respuesta JSON
                         $data = json_decode($response, true);
-
+                        
                         // Procesar los datos encontrados
                         if (!empty($data)) {
                             foreach ($data as $item) {
@@ -244,6 +262,7 @@
                                 echo "<td>" . $item['team'] . "</td>";
                                 echo "<td>" . $item['trainer'] . "</td>";
                                 echo "<td>" . $item['cedula'] . "</td>";
+                                
                                 echo '<td><button type="submit" name="subirData" value="' . $item['cedula'] . '">↑</button></td>';
                                 // Añade más columnas según los datos que quieras mostrar
                                 echo "</tr>";
@@ -254,6 +273,7 @@
                         echo "</tbody>";
                         echo "</table>";
                         ?>
+                        </form>
                     </tbody>
             </div>
         </div>
