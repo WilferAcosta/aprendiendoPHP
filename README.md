@@ -12,3 +12,5 @@ Utiliza los botones para realizar las operaciones CRUD:
 x: Eliminar datos.
 ⌨: Buscar datos.
 ↑: Cargar datos en el formulario para editarlos.
+
+link del base de datos => https://mockapi.io/projects/648135c829fa1c5c50312fd0
