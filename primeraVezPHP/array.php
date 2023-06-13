@@ -260,5 +260,6 @@ echo "... y después:\n";
 // array_chunk(): Divide un array en fragmentos más pequeños.
 // array_keys(): Devuelve todas las claves de un array.
 // array_values(): Devuelve todos los valores de un array.
-// array_walk(): Aplica una función de devolución de llamada a cada elemento de un array.
+// array_walk(): Aplica una función de devolución de llamada a cada elemento de un array 
+//merge sirve para mezclar dos array
 ?>
