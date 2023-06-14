@@ -11,7 +11,12 @@
                 $this->{$name}=$value;
             }
             public function __get(string $name){
-                return method_exists($this, $name) ? $this->{$name}():$this->{$name};
+                if(method_exists($this, $name) && $this->{$name}){
+                    return $this->{$name}();
+                }else{
+                    return $this->{$name};
+                }
+            
             }
         }
     //parametro es el nombre de la variable y argumento es el valor de la variable.
