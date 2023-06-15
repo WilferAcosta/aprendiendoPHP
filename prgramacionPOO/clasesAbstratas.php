@@ -11,7 +11,7 @@ abstract class Animal {
     ?Estos parámetros son marcados como private y protected para que solo sean accesibles dentro de la clase. 
     *El constructor asigna los valores proporcionados a las propiedades correspondientes utilizando el operador de asignación.
      */
-    public function construct(private string $nombre, private string $apellido, protected int $edad ) {
+    public function __construct(private string $nombre, private string $apellido, protected int $edad ) {
         $this->setEdad($edad); 
     };
     /*
