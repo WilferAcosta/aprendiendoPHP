@@ -10,45 +10,84 @@ Para probar tu código, crea un objeto Parqueadero y estaciona y retira tanto un
 
 <?php
 
-abstract class Vehiculo{
-    
-    public function __construct(protected int $placa=0){
+abstract class Vehiculo {
+    protected int $placa;
+
+    public function __construct(int $placa) {
+        $this->placa = $placa;
     }
-    abstract function getType();
+
+    abstract public function getType(): string;
 }
 
-class coche extends Vehiculo{
-    public function getType(){
-        return "coche";
+class Coche extends Vehiculo {
+    public function getType(): string {
+        return "carro";
     }
 }
-class motocicleta extends Vehiculo{
-    public function getType(){
-        return "motocicleta";
+
+class Motocicleta extends Vehiculo {
+    public function getType(): string {
+        return "moto";
     }
 }
-interface ParqueaderoInterface{
-    public function estacionar(Vehiculo $vehiculo):void;
-    public function retirar(Vehiculo $vehiculo):void;
+
+interface ParqueaderoInterface {
+    public function estacionar(Vehiculo $vehiculo): void;
+    public function retirar(Vehiculo $vehiculo): void;
 }
+
 class Parqueadero implements ParqueaderoInterface {
     private array $vehiculos;
 
     public function estacionar(Vehiculo $vehiculo): void {
         $this->vehiculos[] = $vehiculo;
-        echo $vehiculo->getType() . ' estacionado/a en el parqueadero.' . PHP_EOL;
+        echo $vehiculo->getType() . ' estacionado en el parqueadero.' . PHP_EOL;
     }
 
     public function retirar(Vehiculo $vehiculo): void {
         $index = array_search($vehiculo, $this->vehiculos);
         if ($index !== false) {
             unset($this->vehiculos[$index]);
-            echo $vehiculo->getType() . ' retirado/a del parqueadero.' . PHP_EOL;
+            echo $vehiculo->getType() . ' retirado del parqueadero.' . PHP_EOL;
         } else {
-            echo $vehiculo->getType() . ' no encontrado/a en el parqueadero.' . PHP_EOL;
+            echo $vehiculo->getType() . ' no encontrado en el parqueadero.' . PHP_EOL;
         }
     }
 }
 
+// Recibir los datos de la solicitud POST
+$_DATA = json_decode(file_get_contents("php://input"), true);
+
+// Verificar si se recibieron los datos correctamente
+if (!empty($_DATA) && isset($_DATA["placasCoche"]) && isset($_DATA["placasMotocicleta"])) {
+    // Crear una instancia de Parqueadero
+    $parqueadero = new Parqueadero();
+
+    // Estacionar los coches
+    foreach ($_DATA["placasCoche"] as $placaCoche) {
+        $coche = new Coche($placaCoche);
+        $parqueadero->estacionar($coche);
+    }
+
+    // Estacionar las motocicletas
+    foreach ($_DATA["placasMotocicleta"] as $placaMotocicleta) {
+        $motocicleta = new Motocicleta($placaMotocicleta);
+        $parqueadero->estacionar($motocicleta);
+    }
+    //retirar vehiculos
+    foreach ($_DATA["placasCoche"] as $placaCoche) {
+        $coche = new Coche($placaCoche);
+        $parqueadero->retirar($coche);
+    }
+    
+    foreach ($_DATA["placasMotocicleta"] as $placaMotocicleta) {
+        $motocicleta = new Motocicleta($placaMotocicleta);
+        $parqueadero->retirar($motocicleta);
+    }
+
+} else {
+    echo "Error: Datos de entrada incorrectos.";
+}
 
 ?>
