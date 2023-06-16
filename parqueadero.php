@@ -19,25 +19,34 @@ abstract class Vehiculo{
 
 class coche extends Vehiculo{
     public function getType(){
-
+        return "coche";
     }
 }
 class motocicleta extends Vehiculo{
     public function getType(){
-
+        return "motocicleta";
     }
 }
 interface ParqueaderoInterface{
-    public function estacionar(Vehiculo $vehiculo);
-    public function retirar(Vehiculo $vehiculo);
+    public function estacionar(Vehiculo $vehiculo):void;
+    public function retirar(Vehiculo $vehiculo):void;
 }
-class Parqueadero implements ParqueaderoInterface{
-    
-    public function estacionar(Vehiculo $vehiculo){
+class Parqueadero implements ParqueaderoInterface {
+    private array $vehiculos;
 
+    public function estacionar(Vehiculo $vehiculo): void {
+        $this->vehiculos[] = $vehiculo;
+        echo $vehiculo->getType() . ' estacionado/a en el parqueadero.' . PHP_EOL;
     }
-    public function retirar(Vehiculo $vehiculo){
 
+    public function retirar(Vehiculo $vehiculo): void {
+        $index = array_search($vehiculo, $this->vehiculos);
+        if ($index !== false) {
+            unset($this->vehiculos[$index]);
+            echo $vehiculo->getType() . ' retirado/a del parqueadero.' . PHP_EOL;
+        } else {
+            echo $vehiculo->getType() . ' no encontrado/a en el parqueadero.' . PHP_EOL;
+        }
     }
 }
 
