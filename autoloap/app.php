@@ -1,24 +1,35 @@
 <?php
-//configurar el autoload manualmente
-
-function autoload($class){
-    $carpeta = [
-        dirname(__DIR__) . "/scripts/clients",
-        dirname(__DIR__) . "/scripts/compra"
+trait getInstance{
+    static $getinstance;
+    static function getInstance(){
+        $arg = (array) func_get_args()[0];
+        if(!self::$getinstance instanceof self){
+            try{
+                self::$getinstance = new self(...$arg);
+                return self::$getinstance;
+            } catch(\Throwable $e){
+                return $e->getMessage();
+            }
+            
+        }
+        return self::$getinstance;
+    }
+}
+function autoload($e){
+    $carpeta = (array) [
+        dirname(__DIR__)."/scripts/clients",
+        dirname(__DIR__)."/scripts/compra"
     ];
     foreach($carpeta as $ruta){
         if($handler = opendir($ruta)){
-            while($file = readdir($handler)){
+            while ($file = readdir($handler)){
                 if($file != "." && $file != ".."){
-                    require_once $ruta."/".$files;
+                    require_once $ruta."/".$file;
                 }
             }
         }
     }
 }
-
 spl_autoload_register('autoload');
-
-new \app\user\usuario();
-
+print_r(\app\details\detalle::$getInstance(["nombre"=>"wilfer" ,"edad"=>28]));
 ?>

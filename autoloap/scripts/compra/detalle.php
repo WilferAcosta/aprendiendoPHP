@@ -1,9 +1,9 @@
 <?php
 
-namespace app\detalle;
-    class detalle{
-        function __construct(){
-        echo "Nombre " .__CLASS__;// CUANDO EL METODO ES ESTATICO SE USA SELF PARA QUE SAQUE EL NOMBRE DE LA CLASS Y EL CLASS PARA MODIFICADORES PUBLI PRIVATE Y PROTEGIDO
-    }
-    }
+namespace app\details;
+use getInstance as instan;
+class detalle{
+    use instan;
+    function __construct(public string $nombre,public int $edad){}
+}
 ?>
