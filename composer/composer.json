@@ -1,0 +1,24 @@
+{
+    "name": "apolt01-012/composer",
+    "description": "..",
+    "license": "LTS",
+    "autoload": {
+        "psr-4": {
+            "App\\": 
+            [
+            "./scripts/factura",
+            "./scripts/usuario",
+            "./scripts"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "WilferAcosta",
+            "email": "w.o.a.r@hotmail.es"
+        }
+    ],
+    "require": {
+        "bramus/router": "~1.6"
+    }
+}
