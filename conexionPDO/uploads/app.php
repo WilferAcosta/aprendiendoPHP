@@ -2,6 +2,7 @@
 
 require "../vendor/autoload.php";
 $router = new \Bramus\Router\Router();
+$dotenv = Dotenv\Dotenv::createImmutable("../")->load();
 
 $router->get("/camper", function () {
     $con = new \App\connect();
@@ -45,4 +46,5 @@ $router->delete("/camper", function () {
 });
 
 $router->run();
+
 ?>

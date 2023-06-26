@@ -2,14 +2,12 @@
 
 namespace App;
 
-class connect extends credentials{
-    protected $conx;
-    function __construct(private $dsn = "mysql", private $port = 0){
-        parent::__construct();
+class connect {
+    public $conx;
+    function __construct(){
         try{
-            $this->conx=new \PDO( $this->dsn.":host=".$this->__get('host').";dbname=".$this->__get('dbname').";user=". $this->username.";password=".$this->__get('password').";port=". $this->port);
+            $this->conx=new \PDO( $_ENV["DNS"].":host=".$_ENV["HOST"].";dbname=".$_ENV["DBNAME"].";user=".$_ENV["USER"].";password=".$_ENV["PASSWORD"].";port=".$_ENV["PORT"]);
             $this->conx->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            print_r("conexion exitosa mi primera vez en una conexion de pdo ");
         }catch (\PDOException $e){
             print_r($e->getMessage());
         }
