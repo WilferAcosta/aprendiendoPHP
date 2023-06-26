@@ -1,7 +1,5 @@
 <?php
-
 namespace App;
-
 class connect {
     public $conx;
     function __construct(){
@@ -14,3 +12,4 @@ class connect {
                 
     }
 }
+?>
